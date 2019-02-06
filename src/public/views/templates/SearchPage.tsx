@@ -2,13 +2,14 @@ import * as React from "react";
 import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 
-import { TextField } from 'office-ui-fabric-react/lib/TextField';
 
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+
+import { GitHubRepositoryCounts } from "../components/GitHubRepositoryCounts";
 
 export interface ISearchPageProps {
 	onSearch: ( value: any) => Promise<void>;
@@ -66,11 +67,7 @@ export class SearchPage extends React.Component<any, any> {
 					<div className="github-repository-search-item-content">
 						<Label>{result.description}</Label>
 						<br />
-						<Label>
-							<Icon iconName="FavoriteStarFill" />&nbsp; {result.stargazers_count}
-							&nbsp; | &nbsp; <Icon iconName="BranchFork2" />&nbsp; {result.forks}
-							&nbsp; | &nbsp; <Icon iconName="IssueTracking" />&nbsp; {result.open_issues}
-						</Label>
+						<GitHubRepositoryCounts repository={result} />
 					</div>
 				</div>
 			)}

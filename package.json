@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx parcel build src/index.htm",
-    "dev": "npx parcel src/index.htm"
+    "build": "npx parcel build src/public/index.htm",
+    "dev": "npx parcel src/public/index.htm"
   },
   "author": "elliott-parkinson",
   "license": "ISC",
