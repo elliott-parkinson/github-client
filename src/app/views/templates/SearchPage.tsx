@@ -59,7 +59,12 @@ export class SearchPage extends React.Component<any, any> {
 					/>
 					<div className="github-repository-search-item-content">
 						<Label>{result.description}</Label>
-						<Label><Icon iconName="FavoriteStarFill" />&nbsp; {result.stargazers_count}</Label>
+						<br />
+						<Label>
+							<Icon iconName="FavoriteStarFill" />&nbsp; {result.stargazers_count}
+							&nbsp; | &nbsp; <Icon iconName="BranchFork2" />&nbsp; {result.forks}
+							&nbsp; | &nbsp; <Icon iconName="IssueTracking" />&nbsp; {result.open_issues}
+						</Label>
 					</div>
 				</div>
 			 )}
