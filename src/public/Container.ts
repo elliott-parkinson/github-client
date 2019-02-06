@@ -1,4 +1,4 @@
-import { GithubApi } from "./lib/github-api";
+import { GithubApi } from "../packages/github-api";
 
 export interface IContainer {
 	GithubApi: GithubApi;

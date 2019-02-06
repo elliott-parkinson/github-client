@@ -16,6 +16,8 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { ActionButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 
+import { GitHubRepositoryCounts } from "./components/GitHubRepositoryCounts";
+
 // This odd line fixes a linting issue with typescript and ReactMarkdown. It's ugly, but it works.
 let MarkDownRender: React.Component = ReactMarkdown;
 
@@ -80,13 +82,8 @@ export class View extends React.Component<any, any> {
 					<div className="ms-modal-body">
 						<div className="ms-modal-inner-body">
 							<div style={{textAlign: "center", marginLeft: "auto", marginRight: "auto"}}>
-								<Label>
-									<Icon iconName="FavoriteStarFill" />&nbsp; {this.store.SelectedRepository.stargazers_count}
-									&nbsp; | &nbsp; <Icon iconName="BranchFork2" />&nbsp; {this.store.SelectedRepository.forks}
-									&nbsp; | &nbsp; <Icon iconName="IssueTracking" />&nbsp; {this.store.SelectedRepository.open_issues}
-								</Label>
+								<GitHubRepositoryCounts repository={this.store.SelectedRepository} />
 							</div>
-							
 							
 							{ this.store.LoadingReadme ? 
 								<MessageBar><Icon iconName="ProgressRingDots" /> &nbsp; Loading readme...</MessageBar> : 
