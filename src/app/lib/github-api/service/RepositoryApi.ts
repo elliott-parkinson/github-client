@@ -24,10 +24,14 @@ export interface IBasicGithubRepositorySearchItem {
 
 	html_url: string;
 	url: string;
+
+	owner: any;
+	readme: string;
 }
 
 export interface IBasicGithubSearchResponse {
 	items: IBasicGithubRepositorySearchItem[];
+	total: number;
 	success: boolean;
 }
 
@@ -44,17 +48,34 @@ export class RepositoryApi {
 				this.Url + '/search/repositories?'
 				+ "q="+encodeURIComponent(term)
 			);
-			
+
 			return {
 				success: true,
+				total: response.data.total_count,
 				items: response.data.items
 			} as IBasicGithubSearchResponse;
 		}
 		catch (exception) {
 			return {
 				success: false,
+				total: 0,
 				items: []
 			} as IBasicGithubSearchResponse;
+		}
+	}
+
+	public async GetReadme(repo: IBasicGithubRepositorySearchItem): Promise<string> {
+		let readmeUrl: string = this.Url + '/repos/' + repo.owner.login +'/' + repo.name +'/readme'
+		console.log(readmeUrl);
+		try {
+			const response = await axios.get(
+				readmeUrl
+			);
+
+			return atob(response.data.content);
+		}
+		catch (exception) {
+			return "";
 		}
 	}
 }

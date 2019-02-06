@@ -8,11 +8,13 @@ import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { IconButton } from 'office-ui-fabric-react/lib/Button';
+import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 
 export interface ISearchPageProps {
 	onSearch: ( value: any) => Promise<void>;
+	onView: ( value: any) => void;
 	searchResults: any[];
+	searching: boolean;
 }
 
 
@@ -25,14 +27,18 @@ export class SearchPage extends React.Component<any, any> {
 	}
 
 	render() {
-		return <div>
+		return <div className="github-search-area">
 			<SearchBox
 				placeholder="Search"
 				onSearch={this.props.onSearch}
 				underlined={true}
       		/>
 
-			{this.props.searchResults.map( result =>
+			{ this.props.searching == false && this.props.searchResults.length ===0 ? <MessageBar messageBarType={MessageBarType.error} isMultiline={false} dismissButtonAriaLabel="Close">
+				No search results to display.
+			</MessageBar> : ''}
+
+			{ this.props.searching ? <MessageBar><Icon iconName="ProgressRingDots" /> &nbsp; Loading...</MessageBar> : this.props.searchResults.map( result =>
 				<div key={result.id} className="github-repository-search-item">
 					<CommandBar
 						items={[
@@ -52,7 +58,7 @@ export class SearchPage extends React.Component<any, any> {
 								iconProps: {
 									iconName: 'RedEye'
 								},
-								onClick: () => console.log('View')
+								onClick: item => this.props.onView(result)
 							  }
 						]}
 						ariaLabel={'Use left and right arrow keys to navigate between commands'}
@@ -67,7 +73,7 @@ export class SearchPage extends React.Component<any, any> {
 						</Label>
 					</div>
 				</div>
-			 )}
+			)}
 		</div>;
 	}
 }

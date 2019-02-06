@@ -25,6 +25,14 @@ html, body {
 	margin-right: auto;
 	max-width: 800px;
 
+	.github-search-area {
+		padding-top: 4px;
+
+		.ms-SearchBox {
+			margin-bottom: 16px;
+		}
+	}
+
 	.github-repository-search-item {
 		padding-top: 16px;
 		padding-bottom: 16px;
@@ -40,5 +48,38 @@ html, body {
 	.github-repository-search-item-content {
 		margin-left: 26px;
 		margin-right: 26px;
+	}
+}
+
+
+
+.ms-modal-header {
+	padding: 6px;
+	padding-left: 32px;
+	padding-right: 32px;
+	background-color: #24292e;
+	label {
+		color: white !important;
+		margin-left: 12px;
+		width: auto;
+		display: inline-block;
+	}
+
+	button {
+		float: right;
+		margin-top: -4px;
+		margin-right: 12px;
+	}
+}
+
+.ms-modal-body {
+	width: 800px;
+	min-height: 800px;
+	max-width: 100%;
+	padding: 32px;
+
+	.ms-modal-inner-body {
+		width: 100%;
+		height: 100%;
 	}
 }
