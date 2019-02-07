@@ -2,7 +2,7 @@ import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 
 import { IContainer } from "../../Container";
-import { IBasicGithubRepositorySearchItem } from '../../lib/github-api/service/RepositoryApi';
+import { IBasicGithubRepositorySearchItem } from '../../../packages/github-api/models/repository/IBasicGithubRepositorySearchItem';
 import { threadId } from 'worker_threads';
 
 
@@ -10,7 +10,7 @@ export class GithubRepositorySearchAppStore {
     @observable public Container: IContainer;
 
     @observable RepositorySearchResults: any[] = [];
-    @observable SelectedRepository: IBasicGithubRepositorySearchItem | any = {};
+    @observable SelectedRepository: IBasicGithubRepositorySearchItem | any = undefined;
     @observable LoadingReadme: boolean = false;
 
     @action

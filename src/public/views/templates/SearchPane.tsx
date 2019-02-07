@@ -11,7 +11,7 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBa
 
 import { GitHubRepositoryCounts } from "../components/GitHubRepositoryCounts";
 
-export interface ISearchPageProps {
+export interface ISearchPaneProps {
 	onSearch: ( value: any) => Promise<void>;
 	onView: ( value: any) => void;
 	searchResults: any[];
@@ -20,10 +20,10 @@ export interface ISearchPageProps {
 
 
 @observer
-export class SearchPage extends React.Component<any, any> {
-	public props: ISearchPageProps;
+export class SearchPane extends React.Component<any, any> {
+	public props: ISearchPaneProps;
 
-	constructor(props: ISearchPageProps) {
+	constructor(props: ISearchPaneProps) {
 		super(props);
 	}
 
@@ -40,7 +40,7 @@ export class SearchPage extends React.Component<any, any> {
 			</MessageBar> : ''}
 
 			{ this.props.searching ? <MessageBar><Icon iconName="ProgressRingDots" /> &nbsp; Loading...</MessageBar> : this.props.searchResults.map( result =>
-				<div key={result.id} className="github-repository-search-item">
+				<div key={result.id} className="github-repository-search-item" onClick={item => this.props.onView(result)}>
 					<CommandBar
 						items={[
 							{
@@ -49,18 +49,9 @@ export class SearchPage extends React.Component<any, any> {
 								iconProps: {
 									iconName: 'Website'
 								},
+								disabled: true,
 								onClick: () => window.location.href=result.html_url
 							}
-						]}
-						farItems={[
-							{
-								key: 'view',
-								name: 'View',
-								iconProps: {
-									iconName: 'RedEye'
-								},
-								onClick: item => this.props.onView(result)
-							  }
 						]}
 						ariaLabel={'Use left and right arrow keys to navigate between commands'}
 					/>
