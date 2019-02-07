@@ -34,7 +34,6 @@ export class RepositoryApi {
 
 	public async GetReadme(repo: IBasicGithubRepositorySearchItem): Promise<string> {
 		let readmeUrl: string = this.Url + '/repos/' + repo.owner.login +'/' + repo.name +'/readme'
-		console.log(readmeUrl);
 		try {
 			const response = await axios.get(
 				readmeUrl
